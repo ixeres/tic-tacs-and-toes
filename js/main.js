@@ -72,28 +72,39 @@ $(".col").click(function (){
         return;
     }
 
+    // Can't select a box with something already in it!
+
     if(hasWinner==1){
         alert("Please play again... Jabroni.");
         return;
     }
 
+    // Can't keep playing after someone wins!
+
     if(turn==player1Name){
         moveCount++;
+        // Increments the moveCount by 1 for each turn
         $(this).text("O");
+        // Marks box with 'O' string
         grid[row][col] = 1;
+        // Changes value of grid from 0 to 1
         var ifWon = winnerCheck(1,player1Name);
         if(!ifWon){
             if(moveCount>=9){
                 boardMsg("Match Drawn!");
+                // 9 moves without a winner results in a draw!, reset movecount for play again.
                 moveCount=0;
                 $("#playButton").text("Play again");
+                // Change play button to play again.
                 hasWinner=1;
                 return;
             }else{
+              // If no winner, proceed with the game.
                 turn = player2Name;
                 boardMsg(player2Name+"'s turn now!");
             }
             return;
+            // UGH. REMEMBER TO PLACE THESE. REMEMBER TO RETURN. ALWAYS.
         }
         else{
             return;
@@ -102,6 +113,7 @@ $(".col").click(function (){
     else if(turn==player2Name){
         moveCount++;
         $(this).text("X");
+        // Repetition of the rules but for string 'X'
         grid[row][col] = 2;
         var ifWon = winnerCheck(2,player2Name);
         if(!ifWon){
@@ -137,14 +149,18 @@ function winnerCheck(n,playerName){
         (grid[0][0]==n && grid[1][1]==n && grid[2][2]==n)||
         (grid[0][2]==n && grid[1][1]==n && grid[2][0]==n)
 
+        // Next time, use a simpler method to mark and change the board. This is stupid and I hate it.
+
 
         ){
         boardMsg(playerName+" won the game!");
+        // Tell us who the winner is!
         hasWinner = 1;
         moveCount=0;
         $("#playButton").text("Play again");
         return true;
     }
     return false;
+    // ... Because you need this if you have a return true, I guess.
 }
 })
