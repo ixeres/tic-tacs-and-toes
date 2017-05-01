@@ -67,7 +67,7 @@ $(".col").click(function (){
     var row = $(this).parent().index();
     var col = $(this).index();
 
-    if(grid[row][col]!== 0){
+    if(grid[row][col]!==0){
         alert("... I'm afraid I can't do that, Dave." );
         return;
     }
